@@ -22,4 +22,12 @@ MonoBehaviour:
   dexterity: 0
   agility: 0
   vitality: 0
-  textColor: {r: 255, g: 255, b: 255, a: 1}
+  textColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  shouldGlow: 0
+  isAggregated: 0
+  isCoins: 1
+  coinsAmount: 54
+  minCoins: 10
+  maxCoins: 100

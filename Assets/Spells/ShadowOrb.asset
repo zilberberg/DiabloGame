@@ -18,3 +18,9 @@ MonoBehaviour:
   element: 4
   currentCooldown: 0
   maxCooldown: 4
+  spellEffect: {fileID: 4203016472897302526, guid: 88604c290ea5f8d4fbb0fb60619a22b7,
+    type: 3}
+  isOnPointer: 1
+  spellDamageRadius: 2
+  spellCastDistanceRadius: 15
+  movementLockDuration: 0.5

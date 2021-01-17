@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class InventoryManager : MonoBehaviour
 
     public GameObject inventoryItem;
 
+    private int currentCoins = 3000;
+    public GameObject coinsText; 
     private float inventoryItemScale = 15f;
     private List<GameObject> inventoryItems = new List<GameObject>();
     private void Awake()
@@ -20,7 +23,7 @@ public class InventoryManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        coinsText.GetComponent<Text>().text = currentCoins.ToString();
     }
 
     // Update is called once per frame
@@ -43,18 +46,31 @@ public class InventoryManager : MonoBehaviour
 
     internal void AddItem(Item lootItem)
     {
-        foreach (Transform child in inventory.transform)
+        if (lootItem.isCoins)
         {
-            if (child.childCount == 0)
+            currentCoins += lootItem.coinsAmount;
+            coinsText.GetComponent<Text>().text = currentCoins.ToString();
+        } else
+        {
+            foreach (Transform child in inventory.transform)
             {
-                GameObject newInventoryItem = Instantiate(inventoryItem, child.position, child.rotation);
-                inventoryItems.Add(newInventoryItem);
+                if (lootItem.isAggregated)
+                {
+                    if (child.childCount > 0)
+                    {
 
-                newInventoryItem.transform.SetParent(child);
-                newInventoryItem.transform.localScale = new Vector3(inventoryItemScale, inventoryItemScale, inventoryItemScale);
-                newInventoryItem.GetComponent<InventoryItemController>().SetItem(lootItem, child.GetComponent<SlotController>().sizeFactor);
-                return;
+                    }
+                } else if (child.childCount == 0)
+                {
+                    GameObject newInventoryItem = Instantiate(inventoryItem, child.position, child.rotation);
+                    inventoryItems.Add(newInventoryItem);
+
+                    newInventoryItem.transform.SetParent(child);
+                    newInventoryItem.transform.localScale = new Vector3(inventoryItemScale, inventoryItemScale, inventoryItemScale);
+                    newInventoryItem.GetComponent<InventoryItemController>().SetItem(lootItem, child.GetComponent<SlotController>().sizeFactor);
+                    return;
+                }
             }
-        }
+        }        
     }
 }

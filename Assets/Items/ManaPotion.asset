@@ -17,9 +17,17 @@ MonoBehaviour:
   itemPrefab: {fileID: 197236, guid: 4fc855fb7bf094a0891967175e5bdb17, type: 3}
   itemSprite: {fileID: 21300000, guid: 6592b916f86b19e428db6f6847c7b6dd, type: 3}
   rarity: 1
-  type: 0
+  type: 9
   strength: 0
   dexterity: 0
   agility: 0
   vitality: 0
-  textColor: {r: 30, g: 255, b: 0, a: 1}
+  textColor:
+    serializedVersion: 2
+    rgba: 4278255390
+  shouldGlow: 0
+  isAggregated: 1
+  isCoins: 0
+  coinsAmount: 0
+  minCoins: 10
+  maxCoins: 100

@@ -14,7 +14,7 @@ public class Item : ScriptableObject
     public enum Rarity { Common, Uncommon, Rare, Epic, Legendary };
     public Rarity rarity;
 
-    public enum Type { Helmet, Pants, Boots, Gloves, Chest, Weapon, Shield, Coins, HealthPotion };
+    public enum Type { Helmet, Pants, Boots, Gloves, Chest, Weapon, Shield, Coins, HealthPotion, ManaPotion };
     public Type type;
 
     [Header("Item attributes")]
@@ -26,9 +26,26 @@ public class Item : ScriptableObject
     public Color32 textColor;
 
     public bool shouldGlow = false;
+    public bool isAggregated;
+    public bool isCoins;
+    public int coinsAmount;
+    public int minCoins = 10;
+    public int maxCoins = 100;
 
     public void SetItemRarity()
     {
+        if (type == Type.Coins || type == Type.HealthPotion || type == Type.ManaPotion)
+        {
+            shouldGlow = false;
+            rarity = Rarity.Common;
+            textColor = new Color(255, 255, 255);
+            if (type == Type.Coins)
+            {
+                coinsAmount = Random.Range(minCoins, maxCoins);
+            }
+            return;
+        }
+
         float chance = Random.value;
         if (chance > 0.99)
         {
